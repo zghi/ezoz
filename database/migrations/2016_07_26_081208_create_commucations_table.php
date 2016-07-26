@@ -3,25 +3,26 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFirmasTable extends Migration
+class CreateCommucationsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+     public function up()
     {
         //
-        Schema::create('firmas', function(Blueprint $table) {
+         Schema::create('commucations', function(Blueprint $table) {
             $table->increments('id');
             
             $table->integer('city_id')->default(0);
             $table->integer('district_id')->default(0);
-            $table->integer('neigborhood_id')->default(0);
-            $table->string('firma_adi')->default('');
-            $table->string('firma_sektoru')->default('');
+            $table->integer('neighborhood_id')->default(0);
+            $table->string('adres')->default('');
             $table->string('telefon')->default('');
+            $table->string('fax')->default('');
+           $table->string('web_sayfası')->default('');
             $table->string('slug')->default('');
             $table->timestamps();
         });
@@ -35,7 +36,6 @@ class CreateFirmasTable extends Migration
     public function down()
     {
         //
-          Schema::drop('firmas');
+        Schema::drop('commucations');
     }
 }
-

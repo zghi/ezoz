@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
+@extends('layouts.app')
+<?phpuse App\Commucation; ?>
+@section('content')
 
-    <title>Categories</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    </head>
-    <body>
+
     <div class="container">
 
  
@@ -36,6 +31,7 @@
                     'class'=>'form-control', 
                     'placeholder'=>'Telefonunuz')) !!}
                 </div>
+                
                 <label for="">Şehir</label>
                 <select class="form-control input-sm" name="city_id" id="city_id" required>
                     <option selected disabled>Seçiniz</option>
@@ -140,13 +136,23 @@
             
             
             <div class="form-group">
-                {!! Form::submit('Register!', 
+                {!! Form::submit('Kaydet!', 
                 array('class'=>'btn btn-primary')) !!}
             </div>
             
             
             
+            <div class="form-group">
+                <a href="{{ url('commucationss/'.'1') }}">
+                    
+                    Tıkla
+               </a>
+           
             
+            </div>
+            
+            
+         
             
             {!! Form::close() !!}
         </div>
@@ -207,5 +213,5 @@ $('#neighborhood_id').on('change', function (e) {
 
     </script>
 
-</body>
-</html>
+
+@endsection
