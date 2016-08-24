@@ -40,6 +40,38 @@
                     @endforeach
                 </select>
             </div>
+            <div class="form-group">
+                <h1>Firma Bilgileri</h1>
+                <div class="form-group">
+                    {!! Form::label('Firma adı') !!}
+                    {!! Form::text('firma_adi', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Firma adı')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Firma sektörü') !!}
+                    {!! Form::text('firma_sektoru', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Firma sektörü')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Telefon') !!}
+                    {!! Form::text('telefon', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Telefonunuz')) !!}
+                </div>
+                
+                <label for="">Şehir</label>
+                <select class="form-control input-sm" name="il_id" id="il_id" required>
+                    <option selected disabled>Seçiniz</option>
+                    @foreach($iller as $il)
+                    <option value="{{$il->id}}">{{$il->adi}}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="">İlçe</label>
@@ -66,6 +98,41 @@
             
             
             <h1>Kişiler Bilgiler</h1>
+            <div class="form-group">
+                    {!! Form::label('Adınız') !!}
+                    {!! Form::text('adi', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Adınız')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Soyadınız') !!}
+                    {!! Form::text('soyadi', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Soyadınız')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('unvan') !!}
+                    {!! Form::text('unvan', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Ünvanınız')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('E-posta') !!}
+                    {!! Form::email('email', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'E-postanız')) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Telefon') !!}
+                    {!! Form::text('telefonkisisel', null, 
+                    array('required', 
+                    'class'=>'form-control', 
+                    'placeholder'=>'Telefonunuz')) !!}
+                </div>
             <div class="form-group">
                     {!! Form::label('Adınız') !!}
                     {!! Form::text('adi', null, 

@@ -24,29 +24,7 @@ Route::get('/', function () {
    return view('welcome');
 });
 Route::post('/form', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-                'firma_adi' => 'required|max:255',
-                'firma_sektoru' => 'required|max:255',
-                'city_id' => 'required',
-                'district_id' => 'required',
-                'neighborhood_id' => 'required',
-                'telefon' => 'required',
-                'adi' => 'required|max:255',
-                'soyadi' => 'required',
-                'email' => 'required',
-                'unvan' => 'required',
-                'telefonkisisel' => 'required',
-                'name' => 'required',
-                'email' => 'required',
-                'password' => 'required|min:6|confirmed',
-                'password_confirmation' => 'required|min:6'
-    ]);
-
-    if ($validator->fails()) {
-        return redirect('/')
-                        ->withInput()
-                        ->withErrors($validator);
-    }
+    
     
       $firma= new Firma();
       $firma->firma_adi = $request->firma_adi;
