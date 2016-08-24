@@ -5,8 +5,8 @@ use App\Form;
 use App\Firma;
 use App\Customer;
 use App\User;
- use App\Commucation;
- use App\City;
+ use App\IletisimBilgi;
+ use App\Il;
  use App\Task;
 
 /*
@@ -81,78 +81,81 @@ Route::post('/form', function (Request $request) {
 
 
   
-    
-    
+   
+  
    
     
     
    Route::get('/image/{id}', function ($id) {
-        $firmas=Firma::find($id);  
-        return view('firmas.upload' )->with('firmas',$firmas);
+        $firmalar=Firma::find($id);  
+        return view('firmalar.upload' )->with('firmalar',$firmalar);
     });
     
     Route::get('/upload', function() {
-        return View::make('firmas.upload');
+        return View::make('firmalar.upload');
      });
+     
+     
+     
      Route::post('apply/upload/{id}', 'ApplyController@upload');
      
-     
+      Route::delete('/iletisimbilgilerii/{id}', 'ApplyController@destroy');
      
   //modal form
      
      
-   Route::get('/commucations', function () {
-      $commucations = Commucation::all();
-       $cities = City::all();
-        return view('commucations.FirmaProfili')->with('commucations',$commucations)->with('cities', $cities);
+   Route::get('/iletisimbilgileri', function () {
+      $ietisimbilgi = IletisimBilgi::all();
+       $iller =Il::all();
+        return view('iletisimbilgileri.FirmaProfili')->with('iletisimbilgileri',$iletisimbilgi)->with('iller', $iller);
        
     });
 
-   Route::get('/commucations/{id?}',function($id="1"){
-    $commucation = Commucation::find($id);
+   Route::get('/iletisimbilgileri/{id?}',function($id="1"){
+    $iletisimbilgi = IletisimBilgi::find($id);
     
-    return Response::json($commucation);
+    return Response::json($iletisimbilgi);
 });
-   Route::get('/commucationss/{id?}',function($id){
-    $commucations = Commucation::find($id);
-    $cities = City::all();
-    $firmas = Firma::find($id);
-   return view('commucations.FirmaProfili')->with('commucations',$commucations)->with('cities', $cities)->with('firmas', $firmas);
-});
-
-Route::post('/commucations',function(Request $request){
-    $commucation = Commucation::create($request->all());
-
-    return Response::json($commucation);
+   Route::get('/iletisimbilgilerii/{id?}',function($id){
+    $iletisimbilgileri = IletisimBilgi::find($id);
+    $iller = Il::all();
+    $firmalar = Firma::find($id);
+   return view('iletisimbilgileri.FirmaProfili')->with('iletisimbilgileri',$iletisimbilgileri)->with('iller', $iller)->with('firmalar', $firmalar);
 });
 
-Route::put('/commucations/{id?}',function(Request $request,$id){
-    $commucation = Commucation::find($id);
+Route::post('/iletisimbilgileri',function(Request $request){
+    $iletisimbilgi = IletisimBilgi::create($request->all());
+
+    return Response::json($iletisimbilgi);
+});
+
+Route::put('/iletisimbilgileri/{id?}',function(Request $request,$id){
+    $iletisimbilgi = IletisimBilgi::find($id);
 
     
-     $commucation->city_id = $request->city_id;
-      $commucation->district_id = $request->district_id;
-      $commucation->neighborhood_id = $request->neighborhood_id;
-      $commucation->adres = $request->adres;
-      $commucation->telefon = $request->telefon;
-      $commucation->fax = $request->fax;
-      $commucation->web_sayfası = $request->web_sayfası;
-      $commucation->save();
+     $iletisimbilgi->city_id = $request->city_id;
+      $iletisimbilgi->district_id = $request->district_id;
+      $iletisimbilgi->neighborhood_id = $request->neighborhood_id;
+      $iletisimbilgi->adres = $request->adres;
+      $iletisimbilgi->telefon = $request->telefon;
+      $iletisimbilgi->fax = $request->fax;
+      $iletisimbilgi->web_sayfası = $request->web_sayfası;
+      $iletisimbilgi->save();
  
 
-    return Response::json($commucation);
+    return Response::json($iletisimbilgi);
 });
 
-Route::delete('/commucations/{id?}',function($id){
-    $commucation = Commucation::destroy($id);
+Route::delete('/iletisimbilgileri/{id?}',function($id){
+    $iletisimbilgi =  IletisimBilgi::destroy($id);
 
-    return Response::json($commucation);
+    return Response::json($iletisimbilgi);
 });
 
 Route::get('/', function () {
-    $commucation = Commucation::all();
+    $iletisimbilgi = IletisimBilgi::all();
 
-    return View::make('welcome')->with('commucations',$commucation);
+    return View::make('welcome')->with('iletisimbilgileri',$iletisimbilgi);
 });
 
 
@@ -164,7 +167,7 @@ Route::get('/', function () {
  Route::auth();
 
 
-Route::get('/city', 'CitiesController@index');
-Route::get('/ajax-subcat', 'DistrictsController@ajax');
-Route::get('/ajax-subcatt', 'NeighborhoodsController@ajaxdistrict');
-Route::get('/ajax-subcattt', 'NeighborhoodsController@ajaxneighborhood');
+Route::get('/city', 'IllerController@index');
+Route::get('/ajax-subcat', 'IlcelerController@ajax');
+Route::get('/ajax-subcatt', 'SemtlerController@ajaxilce');
+Route::get('/ajax-subcattt', 'SemtlerController@ajaxsemt');

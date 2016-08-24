@@ -4,9 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Firma extends Model
+class KaliteBelgesi extends Model
 {
     //
-     protected $table = 'firmalar'; 
-    
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?phpuse App\Commucation; ?>
+<?phpuse App\IletisimBilgi; ?>
 @section('content')
 
 
@@ -33,17 +33,17 @@
                 </div>
                 
                 <label for="">Şehir</label>
-                <select class="form-control input-sm" name="city_id" id="city_id" required>
+                <select class="form-control input-sm" name="il_id" id="il_id" required>
                     <option selected disabled>Seçiniz</option>
-                    @foreach($cities as $city)
-                    <option value="{{$city->id}}">{{$city->name}}</option>
+                    @foreach($iller as $il)
+                    <option value="{{$il->id}}">{{$il->adi}}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="">İlçe</label>
-                <select class="form-control input-sm" name="district_id" id="district_id" required>
+                <select class="form-control input-sm" name="ilce_id" id="ilce_id" required>
                  <option selected disabled>Seçiniz</option>  
               
                     
@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="">Semt</label>
-                <select class="form-control input-sm" name="neighborhood_id" id="neighborhood_id" required>
+                <select class="form-control input-sm" name="semt_id" id="semt_id" required>
                     <option selected disabled>Seçiniz</option>
                     
                 </select>
@@ -143,7 +143,7 @@
             
             
             <div class="form-group">
-                <a href="{{ url('commucationss/'.'1') }}">
+                <a href="{{ url('iletisimbilgilerii/'.'1') }}">
                     
                     Tıkla
                </a>
@@ -159,51 +159,51 @@
     </div>
 
     <script>
-$('#city_id').on('change', function (e) {
+$('#il_id').on('change', function (e) {
     console.log(e);
 
-    var city_id = e.target.value;
+    var il_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcat?city_id=' + city_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcat?il_id=' + il_id, function (data) {
         //success data
         //console.log(data);
-        $('#district_id').empty();
-         $('#district_id').append('<option value=""> Seçiniz </option>');
+        $('#ilce_id').empty();
+         $('#ilce_id').append('<option value=""> Seçiniz </option>');
         $.each(data, function (index, subcatObj) {
-            $('#district_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#ilce_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
 });
 
-$('#district_id').on('change', function (e) {
+$('#ilce_id').on('change', function (e) {
     console.log(e);
 
-    var district_id = e.target.value;
+    var ilce_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcatt?district_id=' + district_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcatt?ilce_id=' + ilce_id, function (data) {
         //success data
         //console.log(data);
-        $('#neighborhood_id').empty();
-        $('#neighborhood_id').append('<option value=" ">Seçiniz </option>');
+        $('#semt_id').empty();
+        $('#semt_id').append('<option value=" ">Seçiniz </option>');
         $.each(data, function (index, subcatObj) {
-            $('#neighborhood_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#semt_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
 });
-$('#neighborhood_id').on('change', function (e) {
+$('#semt_id').on('change', function (e) {
     console.log(e);
 
-    var neighborhood_id = e.target.value;
+    var semt_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcattt?neighborhood_id=' + neighborhood_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcattt?semt_id=' + semt_id, function (data) {
         //success data
         //console.log(data);
-        $('#neighborhood_id').empty();
+        $('#semt_id').empty();
         $.each(data, function (index, subcatObj) {
-            $('#neighborhood_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#semt_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
 });

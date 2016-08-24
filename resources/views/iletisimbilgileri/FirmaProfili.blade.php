@@ -1,10 +1,10 @@
 @extends('layouts.app')
 <?php
 
-use App\Commucation; ?>
+use App\IletisimBilgi; ?>
 <?php
 
-use App\City;
+use App\Il;
 ?>
 @section('content')
 <!DOCTYPE html>
@@ -17,9 +17,7 @@ use App\City;
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
+        
                 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -80,7 +78,7 @@ use App\City;
                                     <br>
 
                                     <div class="row">
-                                        <div class="col-sm-4" ><img src="/laravelform/public/uploads/{{$firmas->image}}" alt="HTML5 Icon" style="width:128px;height:128px;"></div>
+                                        <div class="col-sm-4" ><img src="/laravelform/public/uploads/{{$firmalar->logo}}" alt="HTML5 Icon" style="width:128px;height:128px;"></div>
                                         <div class="col-sm-4" ><h3>Firma Adı</h3>Firma Adı</div>
 
                                     </div>
@@ -102,10 +100,10 @@ use App\City;
                                                         </div>
                                                         @endif
                                                         <div class="secure">Yeni Bir Resim Yükleyin</div>
-                                                        {!! Form::open(array('url'=>'apply/upload/'.$firmas->id,'method'=>'POST', 'files'=>true)) !!}
+                                                        {!! Form::open(array('url'=>'apply/upload/'.$firmalar->id,'method'=>'POST', 'files'=>true)) !!}
                                                         <div class="control-group">
                                                             <div class="controls">
-                                                                {!! Form::file('image') !!}
+                                                                {!! Form::file('logo') !!}
                                                                 <p class="errors">{!!$errors->first('image')!!}</p>
                                                                 @if(Session::has('error'))
                                                                 <p class="errors">{!! Session::get('error') !!}</p>
@@ -116,13 +114,13 @@ use App\City;
 
                                                         </div>
 
-                                                        {!! Form::submit('Yükle', array('url'=>'apply/upload/'.$firmas->id,'class'=>'btn btn-danger')) !!}
+                                                        {!! Form::submit('Yükle', array('url'=>'apply/upload/'.$firmalar->id,'class'=>'btn btn-danger')) !!}
 
 
                                                         {!! Form::close() !!}
                                                         <br>
-                                                        {{ Form::open(array('url'=>'commucationss/'.$firmas->id,'method' => 'DELETE', 'files'=>true)) }}
-                                                        {{ Form::hidden('id', $firmas->image) }}
+                                                        {{ Form::open(array('url'=>'iletisimbilgilerii/'.$firmalar->id,'method' => 'DELETE', 'files'=>true)) }}
+                                                        {{ Form::hidden('id', $firmalar->logo) }}
                                                         {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                                                         {{ Form::close() }}
                                                     </div>
@@ -138,7 +136,7 @@ use App\City;
                                         </div>
                                     </div>
                                     <br>
-                                    <button class="btn btn-primary btn-xs btn-detail open-modal-image" onclick="" value="{{$firmas->id}}">Düzenle</button>
+                                    <button class="btn btn-primary btn-xs btn-detail open-modal-image" onclick="" value="{{$firmalar->id}}">Düzenle</button>
 
                                     <script src="{{asset('js/ajax-crud-image.js')}}"></script>
                                 </div>
@@ -147,15 +145,6 @@ use App\City;
                             </div>
 
                         </div>
-
-                        <div></div>
-
-
-                        <br>
-
-
-
-
 
 
                         <div class="container">
@@ -171,40 +160,28 @@ use App\City;
 
                                             <table class="table" >
                                                 <thead id="tasks-list" name="tasks-list">
-                                                    <tr id="commucation{{$commucations->id}}">
-                                                    <tr>
-                                                        <td>Şehir:</td>
-                                                        <td>{{$commucations->city_id}}</td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>İlçe:</td>
-                                                        <td>{{$commucations->district_id}}</td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Semt:</td>
-                                                        <td>{{$commucations->neighborhood_id}}</td>
-
-                                                    </tr>
+                                                    <tr id="iletisimbilgisi{{$iletisimbilgileri->id}}">
+                          
+                                                   
+                                                    
                                                     <tr>
                                                         <td>Adres:</td>
-                                                        <td>{{$commucations->adres}}</td>
+                                                        <td>{{$iletisimbilgileri->adres}}</td>
 
                                                     </tr>
                                                     <tr>
                                                         <td>Telefon:</td>
-                                                        <td>{{$commucations->telefon}}</td>
+                                                        <td>{{$iletisimbilgileri->telefon}}</td>
 
                                                     </tr>
                                                     <tr>
                                                         <td>Fax</td>
-                                                        <td>{{$commucations->fax}}</td>
+                                                        <td>{{$iletisimbilgileri->fax}}</td>
 
                                                     </tr>
                                                     <tr>
                                                         <td>Web Sayfası:</td>
-                                                        <td>{{$commucations->web_sayfası}}</td>
+                                                        <td>{{$iletisimbilgileri->web_sayfası}}</td>
 
                                                     </tr>
                                                     </tr>
@@ -225,10 +202,10 @@ use App\City;
                                                                 <div class="form-group error">
                                                                     <label for="inputTask" class="col-sm-3 control-label">Şehir</label>
                                                                     <div class="col-sm-9">
-                                                                        <select class="form-control" name="city_id" id="city_id" required>
+                                                                        <select class="form-control" name="il_id" id="il_id" required>
                                                                             <option selected disabled>Seçiniz</option>
-                                                                            @foreach($cities as $city)
-                                                                            <option  value="{{$city->id}}" >{{$city->name}}</option>
+                                                                            @foreach($iller as $il)
+                                                                            <option  value="{{$il->id}}" >{{$il->adi}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -237,9 +214,9 @@ use App\City;
                                                                 <div class="form-group error">
                                                                     <label for="inputTask" class="col-sm-3 control-label">İlçe</label>
                                                                     <div class="col-sm-9">
-                                                                        <select class="form-control" name="district_id" id="district_id" required>
+                                                                        <select class="form-control" name="ilce_id" id="ilce_id" required>
                                                                             <option selected disabled>Seçiniz</option>
-                                                                            <!--option selected value="{{$commucations->district_id}}">{{$commucations->district_id}}</option-->
+                                                                           
                                                                         </select>
                                                                     </div>
 
@@ -247,7 +224,7 @@ use App\City;
                                                                 <div class="form-group error">
                                                                     <label for="inputTask" class="col-sm-3 control-label">Semt</label>
                                                                     <div class="col-sm-9">
-                                                                        <select class="form-control" name="neighborhood_id" id="neighborhood_id" required>
+                                                                        <select class="form-control" name="semt_id" id="semt_id" required>
                                                                             <option selected disabled>Seçiniz</option>
 
                                                                         </select>
@@ -284,13 +261,13 @@ use App\City;
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary" id="btn-save" value="add">Değişiklikleri Kaydet</button>
-                                                            <input type="hidden" id="commucation_id" name="commucation_id" value="{{$commucations->id}}">
+                                                            <input type="hidden" id="iletisimbilgisi_id" name="iletisimbilgisi_id" value="{{$iletisimbilgileri->id}}">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <button id="btn-add" name="btn-add" class="btn btn-primary btn-xs">Ekle</button>
-                                            <button class="btn btn-primary btn-xs btn-detail open-modal" onclick="alert('mete');$('#city_id').trigger('change');" value="{{$commucations->id}}">Düzenle</button>
+                                            <button class="btn btn-primary btn-xs btn-detail open-modal" onclick="alert('mete');$('#city_id').trigger('change');" value="{{$iletisimbilgileri->id}}">Düzenle</button>
 
                                             <meta name="_token" content="{!! csrf_token() !!}" />
                                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -313,10 +290,10 @@ use App\City;
 
                                             <table class="table" >
                                                 <thead id="tasks-list" name="tasks-list">
-                                                    <tr id="firma{{$firmas->id}}">
+                                                    <tr id="firma{{$firmalar->id}}">
                                                     <tr>
                                                         <td>Tanıtım Yazısı:</td>
-                                                        <td>{{$firmas->tanıtım_yazısı}}</td>
+                                                        <td>{{$firmalar->tanıtım_yazısı}}</td>
 
                                                     </tr>
 
@@ -342,7 +319,7 @@ use App\City;
                                                                 <div class="form-group">
                                                                     <label for="inputEmail3" class="col-sm-3 control-label">Tanıtım Yazısı</label>
                                                                     <div class="col-sm-9">
-                                                                        <!--input type="text" class="form-control" id="tanıtım_yazısı" name="tanıtım_yazısı" placeholder="Tanıtım Yazısı" value=""-->
+                                                                       
                                                                         <textarea id="tanıtım_yazısı" name="tanıtım_yazısı" rows="7" class="form-control ckeditor" placeholder="Lütfen tanıtım yazısını buraya yazınız.."></textarea>
                                                                     </div>
                                                                 </div>
@@ -351,14 +328,14 @@ use App\City;
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary" id="btn-save-tanıtımyazısı" value="add">Değişiklikleri Kaydet</button>
-                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmas->id}}">
+                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmalar->id}}">
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <button class="btn btn-warning btn-xs btn-detail open-modal-tanıtımyazısı" value="{{$firmas->id}}">Düzenle</button>
+                                            <button class="btn btn-warning btn-xs btn-detail open-modal-tanıtımyazısı" value="{{$firmalar->id}}">Düzenle</button>
                                             <button id="btn-add-tanıtımyazısı" name="btn-add-tanıtımyazısı" class="btn btn-primary btn-xs">Ekle</button>
                                             <script src="{{asset('js/ajax-crud-tanıtımyazısı.js')}}"></script>
                                             <script src="//cdn.ckeditor.com/4.5.10/full/ckeditor.js"></script>
@@ -379,7 +356,7 @@ use App\City;
                                         <div class="panel-body">
                                          <table class="table" >
                                                 <thead id="tasks-list" name="tasks-list">
-                                                    <tr id="commucation{{$commucations->id}}">
+                                                    <tr id="iletisimbilgisi{{$iletisimbilgileri->id}}">
                                                     <tr>
                                                         <td>Firma Ünvanı:</td>
                                                         <td></td>
@@ -478,12 +455,12 @@ use App\City;
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary" id="btn-save-malibilgiler" value="add">Değişiklikleri Kaydet</button>
-                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmas->id}}">
+                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmalar->id}}">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-warning btn-xs btn-detail open-modal-malibilgiler" value="{{$firmas->id}}">Düzenle</button>
+                                            <button class="btn btn-warning btn-xs btn-detail open-modal-malibilgiler" value="{{$firmalar->id}}">Düzenle</button>
                                             <button id="btn-add-malibilgiler" name="btn-add-malibilgiler" class="btn btn-primary btn-xs">Ekle</button>
                                             <script src="{{asset('js/ajax-crud-malibilgiler.js')}}"></script>
 
@@ -500,7 +477,7 @@ use App\City;
                                         <div class="panel-body">
                                          <table class="table" >
                                                 <thead id="tasks-list" name="tasks-list">
-                                                    <tr id="commucation{{$commucations->id}}">
+                                                    <tr id="iletisimbilgisi{{$iletisimbilgileri->id}}">
                                                     <tr>
                                                         <td>Ticaret Sicil No:</td>
                                                         <td></td>
@@ -621,12 +598,12 @@ use App\City;
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-primary" id="btn-save-ticaribilgiler" value="add">Değişiklikleri Kaydet</button>
-                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmas->id}}">
+                                                            <input type="hidden" id="firma_id" name="firma_id" value="{{$firmalar->id}}">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-warning btn-xs btn-detail open-modal-ticaribilgiler" value="{{$firmas->id}}">Düzenle</button>
+                                            <button class="btn btn-warning btn-xs btn-detail open-modal-ticaribilgiler" value="{{$firmalar->id}}">Düzenle</button>
                                             <button id="btn-add-ticaribilgiler" name="btn-add-ticaribilgiler" class="btn btn-primary btn-xs">Ekle</button>
                                             <script src="{{asset('js/ajax-crud-ticaribilgiler.js')}}"></script>
 
@@ -654,52 +631,52 @@ use App\City;
 
 
                         <script>
-$('#city_id').on('change', function (e) {
+$('#il_id').on('change', function (e) {
     console.log(e);
 
-    var city_id = e.target.value;
+    var il_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcat?city_id=' + city_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcat?il_id=' + il_id, function (data) {
         //success data
         //console.log(data);
-        $('#district_id').empty();
-        $('#district_id').append('<option value=""> Seçiniz </option>');
+        $('#ilce_id').empty();
+        $('#ilce_id').append('<option value=""> Seçiniz </option>');
         $.each(data, function (index, subcatObj) {
-            $('#district_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#ilce_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
-    //$("#district_id)").val={{$commucations->district_id}};
+  
 });
 
-$('#district_id').on('change', function (e) {
+$('#ilce_id').on('change', function (e) {
     console.log(e);
 
-    var district_id = e.target.value;
+    var ilce_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcatt?district_id=' + district_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcatt?ilce_id=' + ilce_id, function (data) {
         //success data
         //console.log(data);
-        $('#neighborhood_id').empty();
-        $('#neighborhood_id').append('<option value=" ">Seçiniz </option>');
+        $('#semt_id').empty();
+        $('#semt_id').append('<option value=" ">Seçiniz </option>');
         $.each(data, function (index, subcatObj) {
-            $('#neighborhood_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#semt_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
 });
-$('#neighborhood_id').on('change', function (e) {
+$('#semt_id').on('change', function (e) {
     console.log(e);
 
-    var neighborhood_id = e.target.value;
+    var semt_id = e.target.value;
 
     //ajax
-    $.get('/laravelform/public/index.php/ajax-subcattt?neighborhood_id=' + neighborhood_id, function (data) {
+    $.get('/laravelform/public/index.php/ajax-subcattt?semt_id=' + semt_id, function (data) {
         //success data
         //console.log(data);
-        $('#neighborhood_id').empty();
+        $('#semt_id').empty();
         $.each(data, function (index, subcatObj) {
-            $('#neighborhood_id').append('<option value="' + subcatObj.id + '">' + subcatObj.name + '</option>');
+            $('#semt_id').append('<option value="' + subcatObj.id + '">' + subcatObj.adi + '</option>');
         });
     });
 });

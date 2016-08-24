@@ -341,3 +341,52 @@
         </div>
     </div>
 </div>
+
+
+ <a href="{{ url('image/'.$firmas->id )  }}">
+                                        <button class="button1"><i class=" medium material-icons">mode_edit</i>Düzenle</button>
+                                    </a>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">Resmini Güncelle</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="frmImage" name="frmImage" class="form-horizontal" novalidate="">
+
+                                                           
+                                                               <div class="span7 offset1">
+                                                                    @if(Session::has('success'))
+                                                                      <div class="alert-box success">
+                                                                      <h2>{!! Session::get('success') !!}</h2>
+                                                                      </div>
+                                                                    @endif
+                                                                    <div class="secure">Yeni Bir Resim Yükleyin</div>
+                                                                    {!! Form::open(array('url'=>'apply/upload/'.$firmas->id,'method'=>'POST', 'files'=>true)) !!}
+                                                                     <div class="control-group">
+                                                                      <div class="controls">
+                                                                      {!! Form::file('image') !!}
+                                                                      <p class="errors">{!!$errors->first('image')!!}</p>
+                                                                    @if(Session::has('error'))
+                                                                    <p class="errors">{!! Session::get('error') !!}</p>
+                                                                    @endif
+                                                                    </div>
+                                                                    </div>
+                                                                    <div id="success"> </div>
+                                                                  {!! Form::submit('Yükle', array('class'=>'send-btn')) !!}
+                                                                  {!! Form::close() !!}
+                                                                  </div>
+
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>

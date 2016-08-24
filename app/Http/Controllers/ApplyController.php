@@ -18,9 +18,9 @@ class ApplyController extends Controller {
     //
     public function upload($id) {
         // getting all of the post data
-        $file = array('image' => Input::file('image'));
+        $file = array('logo' => Input::file('logo'));
         // setting up rules
-        $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+        $rules = array('logo' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
         // doing the validation, passing post data, rules and the messages
         $validator = Validator::make($file, $rules);
         if ($validator->fails()) {
@@ -28,9 +28,9 @@ class ApplyController extends Controller {
             return Redirect::to('upload')->withInput()->withErrors($validator);
         } else {
             // checking file is valid.
-            if (Input::file('image')->isValid()) {
+            if (Input::file('logo')->isValid()) {
                 $destinationPath = 'uploads'; // upload path
-                $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                $extension = Input::file('logo')->getClientOriginalExtension(); // getting image extension
                 $fileName = rand(11111, 99999) . '.' . $extension; // renameing image
 
 
@@ -38,7 +38,7 @@ class ApplyController extends Controller {
                 //$firma->image = $fileName;
 
                 $firma = Firma::find($id);
-                $oldName=$firma->image;
+                $oldName=$firma->logo;
              
                /* if (Input::hasFile('image')) {
                     $file = Input::file('image');
@@ -47,16 +47,16 @@ class ApplyController extends Controller {
                     $firma->image = $name;
                     ;
                 }*/
-                $firma->image = $fileName;
+                $firma->logo = $fileName;
  
                 $firma->save();
 
 
-                Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+                Input::file('logo')->move($destinationPath, $fileName); // uploading file to given path
                 // sending back with message
                 Session::flash('success', 'Upload successfully');
                 File::delete("uploads/$oldName");
-                return Redirect::to('commucationss/'.$firma->id);
+                return Redirect::to('iletisimbilgilerii/'.$firma->id);
                 //return  Redirect::route('commucations')->with('fileName', $fileName);
             } else {
                 // sending back with error message.
@@ -66,8 +66,22 @@ class ApplyController extends Controller {
         }
     }
 
-    public function profile() {
-        return View::make('commucations.FirmaProfili')->with('fileName', $fileName);
-    }
+    
+    public function destroy($id)
+{
+    $item = Firma::findOrFail($id);
+    $oldName=$item->logo;
+    $item->logo=null;
+    
+    $item->save();
+    File::delete("uploads/$oldName");
+    return Redirect::to('iletisimbilgilerii/'.$item->id);
+}
+    
+    
+    
+    
+    
+    
 
 }

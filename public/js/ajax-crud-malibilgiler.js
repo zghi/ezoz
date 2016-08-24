@@ -1,16 +1,17 @@
 $(document).ready(function(){
 
-    var url = "/laravelform/public/index.php/iletisimbilgileri";
+    var url = "/laravelform/public/index.php/commucations";
    
     //display modal form for task editing
-    $('.open-modal').click(function(){
-        var iletisimbilgisi_id = $(this).val();
+    $('.open-modal-malibilgiler').click(function(){
+        var malibilgiler_id = $(this).val();
 
-        $.get(url + '/' + iletisimbilgisi_id, function (data) {
+        $.get(url + '/' + malibilgiler_id, function (data) {
             //success data
             console.log(data);
-            $('#iletisimbilgisi_id').val(data.id);
+            $('#malibilgiler_id').val(data.id);
             $('#city_id').val(data.city_id);
+            
             $('#district_id').val(data.district_id);
             $('#neighborhood_id').val(data.neighborhood_id);
             $('#adres').val(data.adres);
@@ -19,9 +20,9 @@ $(document).ready(function(){
              $('#web_sayfası').val(data.web_sayfası);
             
             
-            $('#btn-save').val("update");
+            $('#btn-save-malibilgiler').val("update");
 
-            $('#myModal').modal('show');
+            $('#myModal-malibilgiler').modal('show');
             
         }) 
     });
@@ -29,24 +30,24 @@ $(document).ready(function(){
    
 
     //display modal form for creating new task
-    $('#btn-add').click(function(){
-        $('#btn-save').val("add");
-        $('#frmTasks').trigger("reset");
-        $('#myModal').modal('show');
+    $('#btn-add-malibilgiler').click(function(){
+        $('#btn-save-malibilgiler').val("add");
+        $('#frmMaliBilgiler').trigger("reset");
+        $('#myModal-malibilgiler').modal('show');
     });
 
     //delete task and remove it from list
-    $('.delete-task').click(function(){
-        var commucation_id = $(this).val();
+    $('.delete-malibilgiler').click(function(){
+        var malibilgiler_id = $(this).val();
 
         $.ajax({
 
             type: "DELETE",
-            url: url + '/' + commucation_id,
+            url: url + '/' + malibilgiler_id,
             success: function (data) {
                 console.log(data);
 
-                $("#task" + commucation_id).remove(); //task yerine ne yazmam lazım ?? o task html adı???
+                $("#task" + malibilgiler_id).remove(); //task yerine ne yazmam lazım ?? o task html adı???
             },
             error: function (data) {
                 console.log('Error:', data);
@@ -55,7 +56,7 @@ $(document).ready(function(){
     });
 
     //create new task / update existing task
-    $("#btn-save").click(function (e) {
+    $("#btn-save-malibilgiler").click(function (e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -77,15 +78,15 @@ $(document).ready(function(){
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save').val();
+        var state = $('#btn-save-malibilgiler').val();
 
         var type = "POST"; //for creating new resource
-        var commucation_id = $('#commucation_id').val();
+        var malibilgiler_id = $('#malibilgiler_id').val();
         var my_url = url;
 
         if (state == "update"){
             type = "PUT"; //for updating existing resource
-            my_url += '/' + commucation_id;
+            my_url += '/' + malibilgiler_id;
         }
 
         console.log(formData);
@@ -100,9 +101,9 @@ $(document).ready(function(){
                 console.log(data);
 
                
-                $('#frmTasks').trigger("reset");
+                $('#frmMaliBilgiler').trigger("reset");
 
-                $('#myModal').modal('hide')
+                $('#myModal-malibilgiler').modal('hide')
             },
             error: function (data) {
                 console.log('Error:', data);
