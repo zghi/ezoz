@@ -94,12 +94,7 @@ Route::post('/form', function (Request $request) {
     
     return Response::json($iletisimbilgi);
 });
-   Route::get('/iletisimbilgilerii/{id?}',function($id){
-    $iletisimbilgileri = IletisimBilgi::find($id);
-    $iller = Il::all();
-    $firmalar = Firma::find($id);
-   return view('iletisimbilgileri.FirmaProfili')->with('iletisimbilgileri',$iletisimbilgileri)->with('iller', $iller)->with('firmalar', $firmalar);
-});
+
 
 Route::post('/iletisimbilgileri',function(Request $request){
     $iletisimbilgi = IletisimBilgi::create($request->all());
